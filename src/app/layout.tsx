@@ -6,7 +6,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Mermaid Playground by Jobbatical',
+  title: 'Mermaid Playground | Jobbatical',
   description: 'Create and view Mermaid diagrams with ease',
 }
 

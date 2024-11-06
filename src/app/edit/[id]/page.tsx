@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import mermaid from 'mermaid'
+import PageLayout from '@/components/PageLayout'
 
 interface MermaidConfig {
   id: string
@@ -79,7 +80,7 @@ export default function EditPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900">
+    <PageLayout>
       <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
         <div className="flex justify-between items-center mb-8">
           <Link
@@ -137,6 +138,6 @@ export default function EditPage() {
           </div>
         </div>
       </div>
-    </main>
+    </PageLayout>
   )
 }

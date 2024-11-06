@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Modal from '@/components/Modal'
+import PageLayout from '@/components/PageLayout'
 
 interface MermaidConfig {
   id: string
@@ -67,12 +68,11 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900">
+    <PageLayout>
       <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
         <div className="flex flex-col gap-4 mb-8">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-              Mermaid Playground by Jobbatical
             </h1>
             <div className="w-full sm:w-auto flex flex-col sm:items-end gap-2">
               <button
@@ -203,6 +203,6 @@ export default function Home() {
           </div>
         </Modal>
       </div>
-    </main>
+    </PageLayout>
   )
 }

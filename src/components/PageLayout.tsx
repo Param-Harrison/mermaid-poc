@@ -10,7 +10,7 @@ export default function PageLayout({ children }: PageLayoutProps) {
       <header className="border-b dark:border-gray-800">
         <div className="max-w-4xl mx-auto p-4 sm:p-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-            Mermaid Playground by Jobbatical
+            Mermaid Playground
           </h1>
         </div>
       </header>
