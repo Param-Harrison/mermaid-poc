@@ -3,19 +3,48 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
   --foreground: #171717;
+  --background: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
     --foreground: #ededed;
+    --background: #0a0a0a;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+/* Mermaid diagram styles */
+.mermaid {
+  background: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  transition: all 0.3s ease;
+}
+
+#mermaid-diagram {
+  transition: width 0.3s ease;
+}
+
+/* Device Preview styles */
+.device-preview-container {
+  transition: max-width 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mermaid {
+    background: white;
+    /* Keep background white for better visibility in dark mode */
+  }
 }

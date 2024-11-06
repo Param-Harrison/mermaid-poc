@@ -1,0 +1,54 @@
+{
+  "configs": [
+    {
+      "id": "1",
+      "title": "Basic Flowchart",
+      "config": "graph TD\n    A[Start] --> B{Is it?}\n    B -- Yes --> C[OK]\n    B -- No --> D[End]"
+    },
+    {
+      "id": "2",
+      "title": "Sequence Diagram",
+      "config": "sequenceDiagram\n    Alice->>John: Hello John, how are you?\n    loop Healthcheck\n        John->>John: Fight against hypochondria\n    end\n    Note right of John: Rational thoughts!\n    John-->>Alice: Great!\n    John->>Bob: How about you?\n    Bob-->>John: Jolly good!"
+    },
+    {
+      "id": "3",
+      "title": "Class Diagram",
+      "config": "classDiagram\n    Animal <|-- Duck\n    Animal <|-- Fish\n    Animal : +int age\n    Animal : +String gender\n    Animal: +isMammal()\n    class Duck{\n      +String beakColor\n      +swim()\n      +quack()\n    }"
+    },
+    {
+      "id": "4",
+      "title": "State Diagram",
+      "config": "stateDiagram-v2\n    [*] --> Still\n    Still --> [*]\n    Still --> Moving\n    Moving --> Still\n    Moving --> Crash\n    Crash --> [*]"
+    },
+    {
+      "id": "5",
+      "title": "Entity Relationship",
+      "config": "erDiagram\n    CUSTOMER ||--o{ ORDER : places\n    ORDER ||--|{ LINE-ITEM : contains\n    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses"
+    },
+    {
+      "id": "6",
+      "title": "User Journey",
+      "config": "journey\n    title My working day\n    section Go to work\n      Make tea: 5: Me\n      Go upstairs: 3: Me\n      Do work: 1: Me, Cat\n    section Go home\n      Go downstairs: 5: Me\n      Sit down: 5: Me"
+    },
+    {
+      "id": "7",
+      "title": "Gantt Chart",
+      "config": "gantt\n    title A Gantt Diagram\n    dateFormat YYYY-MM-DD\n    section Section\n    A task :a1, 2024-01-01, 30d\n    Another task :after a1, 20d\n    section Another\n    Task in sec :2024-01-12, 12d\n    another task : 24d"
+    },
+    {
+      "id": "8",
+      "title": "Pie Chart",
+      "config": "pie title What do we spend time on?\n    \"Development\" : 40\n    \"Testing\" : 20\n    \"Documentation\" : 15\n    \"Meetings\" : 25"
+    },
+    {
+      "id": "9",
+      "title": "Git Graph",
+      "config": "gitGraph\n    commit\n    commit\n    branch develop\n    checkout develop\n    commit\n    commit\n    checkout main\n    merge develop\n    commit\n    commit"
+    },
+    {
+      "id": "10",
+      "title": "Complex Flowchart",
+      "config": "graph TB\n    sq[Square shape] --> ci((Circle shape))\n    ci --> ro{Rhombus}\n    ro -->|Yes| ra[/Parallelogram/]\n    ro -->|No| tr[\\\\Trapezoid\\\\]\n    tr --> hp{Hexagon}\n    hp --> ou[/Output/]"
+    }
+  ]
+}
