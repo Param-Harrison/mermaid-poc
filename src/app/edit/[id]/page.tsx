@@ -75,6 +75,7 @@ export default function EditPage() {
 
       router.push(`/show/${params.id}`)
     } catch (error) {
+      console.error(error)
       setError('Failed to update config')
     }
   }
