@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getConfigs, addConfig, deleteConfig } from '@/lib/db'
+import { generateUUID } from '@/lib/utils'
 
 export async function GET() {
   const configs = getConfigs()

@@ -24,35 +24,70 @@ export default function ShowPage() {
   const [configs, setConfigs] = useState<MermaidConfig[]>([])
   const [selectedConfig, setSelectedConfig] = useState<MermaidConfig | null>(null)
   const [devicePreview, setDevicePreview] = useState<DeviceSize>('auto')
+  const [isLoading, setIsLoading] = useState(true)
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted) return
+
+    mermaid.initialize({ 
+      startOnLoad: true,
+      securityLevel: 'loose',
+      theme: 'default'
+    })
+  }, [isMounted])
+
+  useEffect(() => {
+    if (!isMounted) return
+
+    setIsLoading(true)
     fetch('/api/configs')
       .then(res => res.json())
       .then(data => {
-        setConfigs(data);
-        const current = data.find((c: MermaidConfig) => c.id === params.id);
-        setSelectedConfig(current || null);
+        setConfigs(data)
+        const current = data.find((c: MermaidConfig) => c.id === params.id)
+        setSelectedConfig(current || null)
+        setIsLoading(false)
       })
-      .catch(console.error);
-  }, [params.id]);
+      .catch(error => {
+        console.error('Failed to fetch configs:', error)
+        setIsLoading(false)
+      })
+  }, [params.id, isMounted])
 
   useEffect(() => {
-    if (selectedConfig) {
-      mermaid.initialize({ startOnLoad: true })
-      try {
-        const element = document.querySelector('#mermaid-diagram')
-        if (element) {
-          element.innerHTML = ''
-          mermaid.render('preview-svg', selectedConfig.config)
-            .then(({ svg }) => {
-              element.innerHTML = svg
-            })
+    if (selectedConfig && !isLoading) {
+      const renderDiagram = async () => {
+        try {
+          const element = document.querySelector('#mermaid-diagram')
+          if (element) {
+            element.innerHTML = ''
+            const { svg } = await mermaid.render(
+              'mermaid-' + selectedConfig.id, 
+              selectedConfig.config
+            )
+            element.innerHTML = svg
+          }
+        } catch (error) {
+          console.error('Failed to render diagram:', error)
+          const element = document.querySelector('#mermaid-diagram')
+          if (element) {
+            element.innerHTML = '<div class="text-red-500">Failed to render diagram</div>'
+          }
         }
-      } catch (error) {
-        console.error('Failed to render diagram:', error)
       }
+
+      const timer = setTimeout(() => {
+        renderDiagram()
+      }, 100)
+
+      return () => clearTimeout(timer)
     }
-  }, [selectedConfig])
+  }, [selectedConfig, isLoading])
 
   const getDevicePreviewClass = (size: DeviceSize) => {
     switch (size) {
@@ -65,6 +100,10 @@ export default function ShowPage() {
       default:
         return 'w-full'
     }
+  }
+
+  if (!isMounted) {
+    return null // or a loading skeleton
   }
 
   return (
@@ -118,19 +157,23 @@ export default function ShowPage() {
           </div>
         </div>
 
-        {selectedConfig ? (
+        {isLoading ? (
+          <div className="text-center py-12">
+            <p className="text-gray-500 dark:text-gray-400">Loading...</p>
+          </div>
+        ) : selectedConfig ? (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">
                 {selectedConfig.title}
               </h2>
-              <Link
+              <a
                 href={`/edit/${selectedConfig.id}`}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
               >
                 <FiEdit className="text-lg" />
                 <span>Edit</span>
-              </Link>
+              </a>
             </div>
 
             <div className="relative w-full">

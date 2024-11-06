@@ -71,9 +71,7 @@ export default function Home() {
     <PageLayout>
       <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
         <div className="flex flex-col gap-4 mb-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-            </h1>
+          <div className="flex flex-col sm:flex-row justify-end items-start sm:items-center gap-4">
             <div className="w-full sm:w-auto flex flex-col sm:items-end gap-2">
               <button
                 onClick={() => setIsOpen(true)}
@@ -137,21 +135,21 @@ export default function Home() {
           <div className="grid gap-4">
             {configs.map((config) => (
               <div key={config.id} className="flex justify-between items-center p-6 border dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-                <Link 
+                <a 
                   href={`/show/${config.id}`}
                   className="flex-grow"
                 >
                   <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                     {config.title}
                   </h2>
-                </Link>
+                </a>
                 <div className="flex gap-2">
-                  <Link
+                  <a
                     href={`/edit/${config.id}`}
                     className="px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
                   >
                     Edit
-                  </Link>
+                  </a>
                   <button
                     onClick={() => deleteConfig(config.id)}
                     className="px-4 py-2 text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
